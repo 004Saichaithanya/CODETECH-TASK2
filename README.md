@@ -1,4 +1,4 @@
-# Social Media Platform Task2
+# CODETECH-TASK2:Social Media Platform
 
 **Project by:** P. Sai Chaithanya  
 **Company:** CODETECH IT SOLUTIONS  
