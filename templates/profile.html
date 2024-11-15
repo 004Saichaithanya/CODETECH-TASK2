@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - {{user_profile.user.username}}</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+<body>
+<div class="theme-layout">
+    <section class="profile-header">
+        <div class="feature-photo">
+            <figure><img src="{% static 'images/resources/timeline-1.jpg' %}" alt="Cover Photo"></figure>
+            <div class="profile-info">
+                <form action="/follow" method="POST">
+                    {% csrf_token %}
+                <div class="add-btn">
+                    <a href="/" class="home-link">Home</a>
+                    <span class="post-count" style="color: white;">
+                        {% if no_user_posts == 0 %}
+                            No Posts
+                        {% elif no_user_posts == 1 %}
+                            {{ no_user_posts }} Post
+                        {% else %}
+                            {{ no_user_posts }} Posts
+                        {% endif %}
+                    </span>
+                    {% if user_followers == 0 or user_followers == 1 %}
+                    <span class="followers" style="color: white;">{{user_followers}} follower</span>
+                    {% else %}
+                    <span class="followers" style="color: white;">{{user_followers}} followers</span>
+                    {% endif %}
+                    <span class="following" style="color: white;">{{user_following}} following</span>
+                    <input type="hidden" value="{{user.username}}" name="follower">
+                    <input type="hidden" value="{{user_object.username}}" name="user">
+                    {% if user_object.username == user.username %}
+                    <a href="/settings">Account Settings</a>
+                    {% else %}
+                    {% if request.session.flag %}
+                    <button type="submit" class="follow-btn">Following</button>
+                    {% else %}
+                    <button type="submit" class="follow-btn">Follow</button>
+                    {% endif %}
+                    {% endif %}
+
+                </div>
+            </form>
+            </div>
+            <div class="container-fluid profile-details">
+                <div class="row merged" style="display: flex;flex-direction:column;align-items:start">
+                    <div class="col-lg-2 col-sm-3">
+                        <div class="user-avatar">
+                            <figure><img src="{{ user_profile.profileimg.url }}" alt="Profile Image"></figure>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-sm-9">
+                     <a href="/profile/{{user_profile.user.username}}">   <h3 style="color:darkblue" class="username">@{{ user_profile.user.username }}</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="bio-section">
+        <div class="bio">{{ user_profile.bio }}</div>
+    </section>
+
+    <section class="posts-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <aside class="sidebar static"></aside>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="central-meta">
+                        <ul class="photos">
+                            {% for post in user_posts %}
+                            <li>
+                                <a href="{{ post.image.url }}" data-strip-group="mygroup" title="">
+                                    <img src="{{ post.image.url }}" alt="User Post">
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3">
+                    <aside class="sidebar static"></aside>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Scripts -->
+<script src="{% static 'js/main.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
