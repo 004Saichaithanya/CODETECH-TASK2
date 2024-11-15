@@ -71,9 +71,9 @@ tailwindcss build src/styles.css -o output.css
 python manage.py runserver
 
 ## OUTPUT SCREENS 
-#1 Home Page
+# Home Page
 ![image](https://github.com/user-attachments/assets/b224b7fe-0cc0-4fb3-8e4e-b1b39eedae9b)
-#2 Profile Page
+# Profile Page
 ![image](https://github.com/user-attachments/assets/4b2667e1-0f82-4789-86c7-0bddefdeac89)
 # Search Page
 ![image](https://github.com/user-attachments/assets/e6bfccb4-d52e-450e-9c4d-863742f35bc8)
