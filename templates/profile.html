@@ -43,11 +43,7 @@
                     {% if user_object.username == user.username %}
                     <a href="/settings">Account Settings</a>
                     {% else %}
-                    {% if request.session.flag %}
-                    <button type="submit" class="follow-btn">Following</button>
-                    {% else %}
-                    <button type="submit" class="follow-btn">Follow</button>
-                    {% endif %}
+                    <button type="submit" class="follow-btn">{{button_text}}</button>
                     {% endif %}
 
                 </div>
